@@ -1,10 +1,13 @@
 {% extends 'blog/base.html' %}
     
- {% block content %}
-   <article>
-     <h2>{{ post.title }}</h2>
-     <small><time>published: {{ post.published_date }}</time></small>
-     <br><br>
-   <p>{{ post.content | safe | linebreaks }}</p>
-   </article>
- {% endblock %}
+{% block content %}
+  <article>
+    <h2>{{ post.title }}</h2>
+    <small><time>published: {{ post.published_date }}</time></small>
+    {% if post.location %}
+      <small> • Location: {{ post.location }}</small>
+    {% endif %}
+    <br><br>
+    <p>{{ post.content | safe | linebreaks }}</p>
+  </article>
+{% endblock %}

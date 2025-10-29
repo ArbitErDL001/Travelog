@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <h2 class="text-primary">Posts in {{ location.name }}</h2>
+
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-8">
+      {{ location_map|safe }}
+    </div>
+  </div>
+
+  {% for post in posts %}
+    <article class="mb-3">
+      <h3>
+        <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+        <small> • <time>published: {{ post.published_date }}</time></small>
+      </h3>
+      <p>{{ post.content|truncatewords:30 }}</p>
+    </article>
+  {% empty %}
+    <p>No posts found for this location.</p>
+  {% endfor %}
+
+  <p><a href="{% url 'map' %}" class="btn btn-outline-secondary">← Back to Map</a></p>
+{% endblock %}
